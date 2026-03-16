@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Download Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <p class="eyebrow">Static GitHub Pages Portal</p>
+      <h1>Explore and Download Your Dataset</h1>
+      <p class="intro">
+        Load one CSV in the browser, filter it by commuting zone and year range, preview the
+        matching rows, plot one metric, and download the filtered data as a new CSV.
+      </p>
+    </section>
+
+    <section class="panel controls-panel">
+      <div class="controls-header">
+        <h2>Filters</h2>
+        <p>Choose a commuting zone, a year range, and one metric to plot.</p>
+      </div>
+
+      <div class="grid">
+        <label class="field">
+          <span>Commuting zone ID</span>
+          <input
+            id="czSearch"
+            list="czOptions"
+            placeholder="Type e.g. 100"
+            autocomplete="off"
+          >
+          <datalist id="czOptions"></datalist>
+        </label>
+
+        <label class="field">
+          <span>Metric to plot</span>
+          <select id="metricSelect"></select>
+        </label>
+
+        <label class="field">
+          <span>Start year</span>
+          <select id="startYear"></select>
+        </label>
+
+        <label class="field">
+          <span>End year</span>
+          <select id="endYear"></select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="previewBtn" type="button">Preview matches</button>
+        <button id="downloadBtn" type="button">Download filtered CSV</button>
+      </div>
+
+      <p id="status" class="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel chart-panel">
+      <div class="section-head">
+        <h2>Plot</h2>
+        <p id="chartSummary">Load the data to see a chart.</p>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="resultsChart"></canvas>
+      </div>
+    </section>
+
+    <section class="panel preview-panel">
+      <div class="section-head">
+        <h2>Preview</h2>
+        <p>The first matching rows appear here before download.</p>
+      </div>
+      <div class="table-wrap">
+        <table id="previewTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
