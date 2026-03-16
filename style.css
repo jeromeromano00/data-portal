@@ -61,6 +61,14 @@ h1 {
   line-height: 1.6;
 }
 
+.citation {
+  margin-bottom: 0;
+  max-width: 760px;
+  color: var(--accent);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
 .panel {
   background: rgba(255, 254, 248, 0.92);
   border: 1px solid var(--panel-edge);
@@ -90,6 +98,35 @@ h1 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.overview-card {
+  padding: 18px;
+  border: 1px solid var(--panel-edge);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fffef9 0%, #f7faf5 100%);
+}
+
+.overview-card h3 {
+  margin-bottom: 10px;
+}
+
+.overview-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.overview-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .field {
@@ -190,6 +227,10 @@ tbody tr:nth-child(even) {
   }
 
   .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-grid {
     grid-template-columns: 1fr;
   }
 

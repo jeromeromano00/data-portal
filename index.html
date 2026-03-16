@@ -3,29 +3,93 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Data Download Portal</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Commuting-Zone Data Portal | Image(s)</title>
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
   <main class="page">
     <section class="hero">
-      <p class="eyebrow">Static GitHub Pages Portal</p>
-      <h1>Explore and Download Your Dataset</h1>
+      <p class="eyebrow">Data Repository for Image(s)</p>
+      <h1>Commuting-Zone Measures of Style, Norms, and Cultural Change</h1>
       <p class="intro">
-        Load one CSV in the browser, filter it by commuting zone and year range, preview the
-        matching rows, plot one metric, and download the filtered data as a new CSV.
+        This portal provides commuting-zone-year aggregates constructed for <em>Image(s)</em>,
+        by Hans-Joachim Voth and David Yanagizawa-Drott. The underlying project uses more
+        than 55 million U.S. high school yearbook portraits to study cultural change, the
+        diffusion of new styles, convergence in male and female appearance, and spatial
+        polarization in social norms from 1930 to 2010.
+      </p>
+      <p class="citation">
+        The downloadable series below are intended as a transparent replication and access
+        point for the paper's commuting-zone measures.
+      </p>
+    </section>
+
+    <section class="panel overview-panel">
+      <div class="section-head">
+        <h2>About This Dataset</h2>
+        <p>
+          The data below summarize annual measures of style and norm deviation at the
+          commuting-zone level. Use the selector panel to preview a series or download a
+          filtered CSV for a specific commuting zone and period.
+        </p>
+      </div>
+
+      <div class="overview-grid">
+        <article class="overview-card">
+          <h3>Dataset scope</h3>
+          <p>
+            The portal reports annual commuting-zone aggregates derived from U.S. high school
+            senior portraits between 1930 and 2010. These measures are designed to capture
+            local cultural change and stylistic divergence over time.
+          </p>
+        </article>
+
+        <article class="overview-card">
+          <h3>Style Novelty</h3>
+          <p>
+            Style Novelty captures the prevalence of style combinations that were observed
+            among fewer than 1 percent of students up to and including a given year. It is
+            intended to measure the arrival of genuinely new stylistic combinations.
+          </p>
+        </article>
+
+        <article class="overview-card">
+          <h3>Horizontal Norm Deviation</h3>
+          <p>
+            Horizontal Norm Deviation measures how far a student's style differs from that of
+            contemporaneous peers within the same high school. Higher values indicate weaker
+            conformity to the local peer environment.
+          </p>
+        </article>
+
+        <article class="overview-card">
+          <h3>Vertical Norm Deviation</h3>
+          <p>
+            Vertical Norm Deviation measures how different a cohort's style is from that of
+            students in the same high school twenty years earlier. Higher values indicate
+            greater intergenerational stylistic change.
+          </p>
+        </article>
+      </div>
+
+      <p class="overview-note">
+        Gender-specific variants are reported with the suffixes <code>_m</code> for men and
+        <code>_f</code> for women. The raw index is labeled <em>Norm Deviation Raw Index</em>.
       </p>
     </section>
 
     <section class="panel controls-panel">
       <div class="controls-header">
-        <h2>Filters</h2>
-        <p>Choose a commuting zone, a year range, and one metric to plot.</p>
+        <h2>Download Data</h2>
+        <p>
+          Select a commuting zone, a time window, and a measure to preview the series or
+          download the corresponding subset as CSV.
+        </p>
       </div>
 
       <div class="grid">
         <label class="field">
-          <span>Commuting zone ID</span>
+          <span>Commuting zone (ID)</span>
           <input
             id="czSearch"
             list="czOptions"
@@ -36,7 +100,7 @@
         </label>
 
         <label class="field">
-          <span>Metric to plot</span>
+          <span>Measure</span>
           <select id="metricSelect"></select>
         </label>
 
@@ -52,8 +116,8 @@
       </div>
 
       <div class="actions">
-        <button id="previewBtn" type="button">Preview matches</button>
-        <button id="downloadBtn" type="button">Download filtered CSV</button>
+        <button id="previewBtn" type="button">Preview selection</button>
+        <button id="downloadBtn" type="button">Download selected CSV</button>
       </div>
 
       <p id="status" class="status" aria-live="polite"></p>
