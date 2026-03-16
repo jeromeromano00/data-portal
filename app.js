@@ -6,6 +6,21 @@ const CONFIG = {
   czLabel: "Commuting zone ID"
 };
 
+const METRIC_LABELS = {
+  stylenov: "Style Novelty",
+  stylenov_m: "Style Novelty - men",
+  stylenov_f: "Style Novelty - women",
+  normdev_horizontal: "Horizontal Norm Deviation",
+  normdev_horizontal_m: "Horizontal Norm Deviation - men",
+  normdev_horizontal_f: "Horizontal Norm Deviation - women",
+  normdev_vertical: "Vertical Norm Deviation",
+  normdev_vertical_m: "Vertical Norm Deviation - men",
+  normdev_vertical_f: "Vertical Norm Deviation - women",
+  normdev_raw_index: "Norm Deviation Raw Index",
+  normdev_raw_index_m: "Norm Deviation Raw Index - men",
+  normdev_raw_index_f: "Norm Deviation Raw Index - women"
+};
+
 let allRows = [];
 let allCZs = [];
 let allYears = [];
@@ -101,8 +116,24 @@ function fillSelect(id, values) {
   });
 }
 
+function fillMetricSelect(id, values) {
+  const select = document.getElementById(id);
+  select.innerHTML = "";
+
+  values.forEach(value => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = getMetricLabel(value);
+    select.appendChild(option);
+  });
+}
+
 function setStatus(message) {
   document.getElementById("status").textContent = message;
+}
+
+function getMetricLabel(metric) {
+  return METRIC_LABELS[metric] || metric;
 }
 
 function getFilters() {
@@ -232,7 +263,7 @@ function renderChart(rows, filters) {
 
   const series = buildYearSeries(rows, filters.metric);
   if (!series.length) {
-    summary.textContent = `Matches found, but "${filters.metric}" is not numeric in the filtered rows.`;
+    summary.textContent = `Matches found, but "${getMetricLabel(filters.metric)}" is not numeric in the filtered rows.`;
     return;
   }
 
@@ -241,7 +272,7 @@ function renderChart(rows, filters) {
     data: {
       labels: series.map(point => point.year),
       datasets: [{
-        label: `${filters.metric} for ${filters.cz}`,
+        label: `${getMetricLabel(filters.metric)} for ${filters.cz}`,
         data: series.map(point => point.value),
         borderColor: "#246b45",
         backgroundColor: "rgba(36, 107, 69, 0.18)",
@@ -270,14 +301,14 @@ function renderChart(rows, filters) {
         y: {
           title: {
             display: true,
-            text: filters.metric
+            text: getMetricLabel(filters.metric)
           }
         }
       }
     }
   });
 
-  summary.textContent = `Showing ${filters.metric} for ${filters.cz} from ${filters.startYear} to ${filters.endYear}.`;
+  summary.textContent = `Showing ${getMetricLabel(filters.metric)} for ${filters.cz} from ${filters.startYear} to ${filters.endYear}.`;
 }
 
 function renderPreview(rows) {
@@ -380,7 +411,7 @@ async function init() {
     fillDatalist("czOptions", allCZs);
     fillSelect("startYear", allYears);
     fillSelect("endYear", allYears);
-    fillSelect("metricSelect", numericMetrics);
+    fillMetricSelect("metricSelect", numericMetrics);
 
     document.getElementById("startYear").value = allYears[0];
     document.getElementById("endYear").value = allYears[allYears.length - 1];
